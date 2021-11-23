@@ -27,7 +27,7 @@ class Test_RigVeda(BaseClass):
         resp = requests.get(url + "/all")
         # creating logger object for the logs
         log = self.get_logger()
-
+        log.info("**** Starting Test For Schema of response Validation ****")
         log.info(type(resp.json()))
 
         # right now checking the schema for only one verse can be modified for all the verses using for loop
@@ -43,12 +43,14 @@ class Test_RigVeda(BaseClass):
                   'sungfor': {'type': 'string'},
                   'sungforcategory': {'type': 'string'}
                   }
+        log.info(schema)
         # pass schema variable to an instance of the Validator class
         # and invoke the validate() to validate a dictionary against the schema.
         validator = Validator(schema, require_all=True)
         is_valid = validator.validate(json_data)
 
         assert is_valid, log.info(str(validator.errors) + " Schema validation failed")
+        log.info("Success,Schema is validated correctly")
 
     # Test case for mandal resource validation
     # test data is parameterized and saved in DataforVerses class
@@ -60,7 +62,7 @@ class Test_RigVeda(BaseClass):
         # creating logger object for the logs
         log = self.get_logger()
 
-        log.info("Starting test for mandal validation")
+        log.info("**** Starting test for mandal validation ****")
         log.info(m)
         # Checking the mandal data Type
         log.info("Mandal data type is :")
@@ -133,7 +135,7 @@ class Test_RigVeda(BaseClass):
 
         # creating logger object for the logs
         log = self.get_logger()
-        log.info("Starting test for Sukta validation")
+        log.info("**** Starting test for Sukta validation ****")
         log.info(s)
 
         # Checking the sukta data Type
@@ -203,6 +205,7 @@ class Test_RigVeda(BaseClass):
     def test_delete(self):
         resp = requests.delete(url)
         log = self.get_logger()
+        log.info("**** Starting Test For Delete Request On API ****")
         log.info("Status Code returned is :")
         log.info(resp.status_code)
         log.info("Staus code reason is")
